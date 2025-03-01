@@ -6,6 +6,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "org.tasks.controller")
+@ComponentScan(basePackages = "org.tasks")
 public class WebConfig {
 }

@@ -18,4 +18,9 @@ public class BlogController {
                 """;
     }
 
+    @GetMapping("/index")
+    public String getIndex() {
+        return "index";
+    }
+
 }
