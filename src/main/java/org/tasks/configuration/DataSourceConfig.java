@@ -36,13 +36,13 @@ public class DataSourceConfig {
         return new JdbcTemplate(dataSource);
     }
 
-    @EventListener
+    /*@EventListener
     public void fillDb(ContextRefreshedEvent event) {
         DataSource dataSource = event.getApplicationContext().getBean(DataSource.class);
 
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource("scripts/schema.sql"));
         populator.execute(dataSource);
-    }
+    }*/
 
 }
