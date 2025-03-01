@@ -4,10 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tasks.dto.PostDto;
+import org.tasks.service.BlogService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/home")
 public class BlogController {
+
+    private final BlogService blogService;
+
+    public BlogController(BlogService blogService) {
+        this.blogService = blogService;
+    }
 
     @GetMapping
     @ResponseBody
@@ -18,9 +28,17 @@ public class BlogController {
                 """;
     }
 
-    @GetMapping("/index")
-    public String getIndex() {
-        return "index";
+    @GetMapping("/somepage")
+    public String getSomePage() {
+        return "somepage";
+    }
+
+    @GetMapping("/post")
+    @ResponseBody
+    public String getAllPost() {
+        List<PostDto> posts =  blogService.getAllPost();
+        posts.forEach(System.out::println);
+        return "<h1>" + posts.toString() + "</h1>";
     }
 
 }
