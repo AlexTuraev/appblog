@@ -1,32 +1,39 @@
 package org.tasks.configuration;
 
 import org.h2.Driver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {
 
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    String username;
+    @Value("${spring.datasource.password}")
+    String password;
+
     @Bean
-    public DataSource dataSource(
-            @Value("${spring.datasource.url}") String url,
-            @Value("${spring.datasource.username}") String username,
-            @Value("${spring.datasource.password}") String password
-    ) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    @Profile("devh2")
+    public DataSource dataSourceH2() {
+        DriverManagerDataSource dataSource = getBaseConfiguredDataSource();
         dataSource.setDriverClassName(Driver.class.getName());
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
+        return dataSource;
+    }
+
+    @Bean
+    @Profile("dev")
+    public DataSource dataSourcePostgres() {
+        DriverManagerDataSource dataSource = getBaseConfiguredDataSource();
+        dataSource.setDriverClassName(org.postgresql.Driver.class.getName());
 
         return dataSource;
     }
@@ -34,6 +41,15 @@ public class DataSourceConfig {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    private DriverManagerDataSource getBaseConfiguredDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+
+        return dataSource;
     }
 
     /*@EventListener
