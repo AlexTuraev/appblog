@@ -33,7 +33,8 @@ public class DataSourceConfig {
     @Profile("dev")
     public DataSource dataSourcePostgres() {
         DriverManagerDataSource dataSource = getBaseConfiguredDataSource();
-        dataSource.setDriverClassName(org.postgresql.Driver.class.getName());
+//        dataSource.setDriverClassName(org.postgresql.Driver.class.getName());
+        dataSource.setDriverClassName("org.postgresql.Driver");
 
         return dataSource;
     }
