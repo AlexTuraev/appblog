@@ -13,7 +13,6 @@ import java.util.List;
 public class BlogServiceImpl implements BlogService {
 
     private final BlogRepository blogRepository;
-
     private final PostMapping mapper;
 
     public BlogServiceImpl(BlogRepository blogRepository, PostMapping mapper) {
@@ -25,5 +24,8 @@ public class BlogServiceImpl implements BlogService {
     public List<PostDto> getAllPost() {
         List<PostEntity> entities = blogRepository.findAll();
         return mapper.toDto(entities);
+//        Optional<PostEntity> entities = blogRepository.findById(1L);
+
+
     }
 }

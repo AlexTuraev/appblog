@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.tasks.dao.model.PostEntity;
 import org.tasks.dao.repository.BlogRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class BlogRepositoryImpl implements BlogRepository {
                         rs.getLong("id"),
                         rs.getString("title"),
                         rs.getString("content"),
-                        rs.getInt("countLike")
+                        rs.getInt("count_like")
                 ));
     }
 
