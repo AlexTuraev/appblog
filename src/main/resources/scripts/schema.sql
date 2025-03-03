@@ -20,7 +20,10 @@ create table if not exists post(
 );
 
 
-insert into post(title, content) values ('Пост1', 'Содержание поста №1');
+insert into post(title, content, count_like) values ('Пост1', 'Содержание поста №1', 10);
 insert into post(title, content) values ('Пост2', 'Содержание поста №2');
-insert into post(title, content) values ('Пост2', 'Содержание поста №3. Содержание поста №3');
-insert into post(title, content) values ('Пост2', 'Содержание поста №4. Содержание поста №4.');
+insert into post(title, content) values ('Пост3', 'Содержание поста №3. Содержание поста №3');
+insert into post(title, content) values ('Пост4', 'Содержание поста №4. Содержание поста №4.');
+insert into post(title, content) values ('Пост5', 'Содержание поста №4. Содержание поста №5.');
+insert into post(title, content) values ('Пост6', 'Содержание поста №4. Содержание поста №6.');
+insert into post(title, content) values ('Пост7', 'Содержание поста №4. Содержание поста №7.');
