@@ -10,7 +10,7 @@ import org.tasks.service.BlogService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/")
 public class BlogController {
 
     private final BlogService blogService;
@@ -31,6 +31,11 @@ public class BlogController {
     @GetMapping("/somepage")
     public String getSomePage() {
         return "somepage";
+    }
+
+    @GetMapping("/blogpage")
+    public String getBlogPage() {
+        return "blogpage";
     }
 
     @GetMapping("/post")

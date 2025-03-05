@@ -9,5 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @ComponentScan(basePackages = "org.tasks")
 @PropertySource("classpath:application.properties")
+@PropertySource("classpath:application-dev.properties")
 public class WebConfig {
 }

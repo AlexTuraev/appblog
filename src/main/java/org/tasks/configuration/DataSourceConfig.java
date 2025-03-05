@@ -17,28 +17,27 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Value("${spring.datasource.url}")
-    private String url;
-    @Value("${spring.datasource.username}")
-    String username;
-    @Value("${spring.datasource.password}")
-    String password;
-
     @Bean
-    @Profile("devh2")
-    public DataSource dataSourceH2() {
-        DriverManagerDataSource dataSource = getBaseConfiguredDataSource();
+    @Profile("profileH2")
+    public DataSource dataSourceH2(
+            @Value("${spring.datasource.url.h2}") String url,
+            @Value("${spring.datasource.username.h2}") String username,
+            @Value("${spring.datasource.password.h2}") String password
+    ) {
+        DriverManagerDataSource dataSource = getBaseConfiguredDataSource(url, username, password);
         dataSource.setDriverClassName(Driver.class.getName());
         return dataSource;
     }
 
     @Bean
-    @Profile("dev")
-    public DataSource dataSourcePostgres() {
-        DriverManagerDataSource dataSource = getBaseConfiguredDataSource();
+    @Profile("profilePostgres")
+    public DataSource dataSourcePostgres(
+            @Value("${spring.datasource.url.postgres}") String url,
+            @Value("${spring.datasource.username.postgres}") String username,
+            @Value("${spring.datasource.password.postgres}") String password
+    ) {
+        DriverManagerDataSource dataSource = getBaseConfiguredDataSource(url, username, password);
         dataSource.setDriverClassName(org.postgresql.Driver.class.getName());
-//        dataSource.setDriverClassName("org.postgresql.Driver");
-
         return dataSource;
     }
 
@@ -47,7 +46,7 @@ public class DataSourceConfig {
         return new JdbcTemplate(dataSource);
     }
 
-    private DriverManagerDataSource getBaseConfiguredDataSource() {
+    private DriverManagerDataSource getBaseConfiguredDataSource(String url, String username, String password) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(url);
         dataSource.setUsername(username);
