@@ -6,8 +6,9 @@
     <title>Blog's articles</title>
 <!--    <link rel="stylesheet" th:href="@{static/styles/blogpage.css}" />-->
     <style>
-        html{
+        html *{
             margin: 0;
+            padding: 0;
         }
         body{
             width: 1200px;
@@ -33,16 +34,20 @@
             text-align: center;
             margin-bottom: 10px;
         }
-        .article__img{
+        .article__div-img{
             display: flex;
             flex-direction: row;
             justify-content: center;
-            width: 400px;
             height: 150px;
             margin-bottom: 15px;
             border: chocolate dotted 1px;
         }
-        .article__text{
+        .article__div-img__img{
+            width: 400px;
+            height: 100%;
+            border: black dotted 1px;
+        }
+        .article__content{
             width: 100%;
             height: 50px;
         }
@@ -55,19 +60,21 @@
 <body>
     <header class="header">Blog page</header>
     <section class="section">
-        <ul th:each="post : ${posts}">
-            <li>
+        <ul>
+            <li th:each="post : ${posts}">
                 <article class=" article">
                     <div class="article__title" th:text="${post.title}"/>
-                    <div class="article__img"><img src="" alt="some picture"></div>
+                    <div class="article__div-img">
+                        <img class="article__div-img__img" src="" alt="some picture">
+                    </div>
 
-                    <div class="article__text">
+                    <div class="article__content">
                         <span th:text="${post.content}"></span>
                     </div>
 
                     <div class="article__footer">
                         <span th:text="${post.countLike}"> лайков</span>
-                        <span th:text="Комментариев ${post.countLike}"></span>
+                        <span th:text="${post.countLike}"></span>
                     </div>
                 </article>
             </li>
