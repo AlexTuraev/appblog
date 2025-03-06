@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BlogRepository {
     List<PostEntity> findAll();
+
+    void save(PostEntity model);
 }

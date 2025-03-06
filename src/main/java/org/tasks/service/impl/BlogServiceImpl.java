@@ -28,4 +28,9 @@ public class BlogServiceImpl implements BlogService {
 
 
     }
+
+    @Override
+    public void save(PostDto postDto) {
+        blogRepository.save(mapper.toModel(postDto));
+    }
 }

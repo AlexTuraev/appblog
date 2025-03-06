@@ -7,4 +7,6 @@ import java.util.List;
 public interface BlogService {
 
     List<PostDto> getAllPost();
+
+    void save(PostDto postDto);
 }

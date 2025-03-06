@@ -116,7 +116,7 @@
         <header class="form-wrapper__element">
             <span class="form-wrapper__title">Добавить статью в блог</span>
         </header>
-        <form th:action="@{/post}" method="post">
+        <form th:action="@{/blog}" method="post">
             <div class="form-wrapper__element">
                 <label for="title">Название поста:</label><br>
                 <input class="form-wrapper__element__input" type="text" id="title" name="title" required>
@@ -129,7 +129,7 @@
 
             <div class="form-wrapper__element">
                 <label for="tag">Теги поста:</label><br>
-                <input class="form-wrapper__element__input" type="text" id="tag" name="tag" required>
+                <input class="form-wrapper__element__input" type="text" id="tag" name="tags" required>
             </div>
 
             <div class="form-wrapper__element">

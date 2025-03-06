@@ -11,5 +11,6 @@ public interface PostMapping {
 
     public PostDto toDto(PostEntity post);
     public List<PostDto> toDto(List<PostEntity> post);
+    public PostEntity toModel(PostDto post);
 
 }
