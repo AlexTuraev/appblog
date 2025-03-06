@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.tasks.dao.model.PostEntity;
 import org.tasks.dao.repository.BlogRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 @Slf4j
