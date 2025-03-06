@@ -1,6 +1,7 @@
 package org.tasks.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,15 +36,16 @@ public class BlogController {
 
     @GetMapping("/blogpage")
     public String getBlogPage() {
+
         return "blogpage";
     }
 
     @GetMapping("/post")
-    @ResponseBody
-    public String getAllPost() {
+    public String getAllPost(Model model) {
         List<PostDto> posts =  blogService.getAllPost();
-        posts.forEach(System.out::println);
-        return "<h1>" + posts.toString() + "</h1>";
+        model.addAttribute("posts", posts);
+
+        return "blogpage";
     }
 
 }
