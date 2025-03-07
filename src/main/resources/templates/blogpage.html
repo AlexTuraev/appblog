@@ -55,11 +55,24 @@
             display: flex;
         }
         .form-wrapper{
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .form-wrapper__form{
+            position: absolute;
+            left: 25%;
+            top: 25%;
+            margin: 0 auto;
+            background: white;
+            width: 50%;
             display: flex;
             flex-direction: column;
-            width: 800px;
-            border: black solid 2px;
             text-align: center;
+            border: black solid 2px;
         }
         .form-wrapper__title{
             font: bold 25px Arial, sans-serif;
@@ -85,13 +98,18 @@
         .btn:hover{
             background: aquamarine;
         }
+        .btn_adding_post{
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
     </style>
 </head>
 
 <body>
     <header class="header">Blog page</header>
-    <section class="section">
-        <button class="btn" onclick="toggleForm()">Добавить статью в блог</button>
+    <button class="btn btn_adding_post" onclick="toggleForm()" id="btn-addPost">Добавить статью в блог</button>
+    <section class="section" id="main-section">
         <ul>
             <li th:each="post : ${posts}">
                 <article class=" article">
@@ -112,11 +130,11 @@
             </li>
         </ul>
     </section>
-    <div class="form-wrapper" id="addPostForm">
-        <header class="form-wrapper__element">
-            <span class="form-wrapper__title">Добавить статью в блог</span>
-        </header>
-        <form th:action="@{/blog}" method="post">
+    <div class="form-wrapper" id="addPostForm" style="display: none">
+        <form class="form-wrapper__form" th:action="@{/blog}" method="post">
+            <header class="form-wrapper__element">
+                <span class="form-wrapper__title">Добавить статью в блог</span>
+            </header>
             <div class="form-wrapper__element">
                 <label for="title">Название поста:</label><br>
                 <input class="form-wrapper__element__input" type="text" id="title" name="title" required>
@@ -144,7 +162,18 @@
     <script>
         function toggleForm() {
             const form = document.getElementById('addPostForm');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            const btn = document.getElementById("btn-addPost");
+            const section = document.getElementById("main-section");
+
+             if(form.style.display === 'none'){
+                 form.style.display = 'block';
+                 btn.innerText = 'Отменить добавление статьи';
+                 section.style.opacity = '0.5';
+             }else {
+                 form.style.display = 'none';
+                 btn.innerText = 'Добавить статью в блог';
+                 section.style.opacity = '1';
+             }
         }
     </script>
 
