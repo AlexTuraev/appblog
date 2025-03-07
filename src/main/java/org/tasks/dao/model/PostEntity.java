@@ -14,5 +14,6 @@ public class PostEntity {
     private String content;
     private Integer countLike;
     private String tags;
+    private byte[] image;
 
 }

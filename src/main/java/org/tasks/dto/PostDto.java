@@ -16,4 +16,6 @@ public class PostDto {
     private Integer countLike;
     private String tags;
 
+    private byte[] image;
+
 }

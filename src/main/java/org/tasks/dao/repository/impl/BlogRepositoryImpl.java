@@ -18,9 +18,9 @@ public class BlogRepositoryImpl implements BlogRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final String FIND_ALL_QUERY = "select id, title, content, count_like, tags from public.post";
+    private final String FIND_ALL_QUERY = "select id, title, content, count_like, tags, image from public.post";
 
-    private final String SAVE_POST_QUERY = "insert into public.post (title, content, tags) values (?, ?, ?)";
+    private final String SAVE_POST_QUERY = "insert into public.post (title, content, tags, image) values (?, ?, ?, ?)";
 
     @Override
     public List<PostEntity> findAll() {
@@ -30,14 +30,15 @@ public class BlogRepositoryImpl implements BlogRepository {
                         rs.getString("title"),
                         rs.getString("content"),
                         rs.getInt("count_like"),
-                        rs.getString("tags")
+                        rs.getString("tags"),
+                        rs.getBytes("image")
                 ));
     }
 
     @Override
     public void save(PostEntity model) {
         jdbcTemplate.update(SAVE_POST_QUERY,
-                model.getTitle(), model.getContent(), model.getTags());
+                model.getTitle(), model.getContent(), model.getTags(), model.getImage());
     }
 
 }

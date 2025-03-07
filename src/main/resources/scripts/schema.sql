@@ -8,7 +8,7 @@ create table if not exists comment(
                                       content text
 );
 
-drop table post;
+drop table if exists post;
 
 create table if not exists post(
     id bigserial primary key,
@@ -19,7 +19,8 @@ create table if not exists post(
     foreign key (tag_id) references tag(id) on delete cascade,
     foreign key (comment_id) references comment(id) on delete cascade,
     count_like int default 0,
-    tags text
+    tags text,
+    image bytea
 );
 
 
