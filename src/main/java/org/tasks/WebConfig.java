@@ -1,5 +1,6 @@
 package org.tasks;
 
+import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

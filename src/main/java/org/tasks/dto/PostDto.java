@@ -3,7 +3,6 @@ package org.tasks.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +14,6 @@ public class PostDto {
     private String content;
     private Integer countLike;
     private String tags;
-
     private byte[] image;
 
 }

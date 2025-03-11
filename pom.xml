@@ -20,14 +20,14 @@
   </properties>
 
   <dependencies>
-    <!-- Spring Web MVC 6.2.1 -->
+    <!-- Spring Web MVC -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>6.2.3</version>
     </dependency>
 
-    <!-- Servlet 5.0.0 -->
+    <!-- Servlet -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
