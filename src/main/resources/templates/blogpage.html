@@ -8,6 +8,15 @@
         html *{
             margin: 0;
             padding: 0;
+            color: black;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: underline;
+            color: blue;
         }
         body{
             width: 1200px;
@@ -33,6 +42,9 @@
             font-size: 25px;
             text-align: center;
             margin-bottom: 10px;
+        }
+        .article__title:hover{
+            cursor: pointer;
         }
         .article__div-img{
             display: flex;
@@ -116,7 +128,10 @@
         <ul>
             <li th:each="post : ${posts}">
                 <article class=" article">
-                    <div class="article__title" th:text="${post.title}"/>
+                    <a th:href="@{/blog/{id}(id=${post.id})}">
+                        <div class="article__title" th:text="${post.title}"/>
+                    </a>
+
                     <div class="article__div-img">
                         <img class="article__div-img__img" th:src="${post.base64Image}" alt="some picture">
                     </div>
