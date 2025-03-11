@@ -49,11 +49,18 @@ public class BlogController {
     }
 
     @GetMapping("/{id}")
-    public String getPost(@PathVariable("id") long id, Model model) {
+    public String getPost(@PathVariable(name = "id") long id, Model model) {
         PostDto post = blogService.getById(id);
         model.addAttribute("post", post);
 
         return "article";
+    }
+
+    @PostMapping(value = "/{id}", params = "_method=delete")
+    public String deleteById(@PathVariable(name = "id") long id, Model model) {
+        blogService.deleteById(id);
+
+        return  "redirect:/blog";
     }
 
 }

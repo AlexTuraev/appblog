@@ -11,4 +11,6 @@ public interface BlogRepository {
     void save(PostEntity model);
 
     Optional<PostEntity> findById(long id);
+
+    void deleteById(long id);
 }

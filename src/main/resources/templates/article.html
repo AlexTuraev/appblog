@@ -49,6 +49,17 @@
             margin-top: 10px;
             display: flex;
         }
+        .actions-div{
+            display: flex;
+        }
+        .btn{
+            font-size: 20px;
+            padding: 5px 30px;
+            border-radius: 10px;
+        }
+        .btn:hover{
+            background: aquamarine;
+        }
     </style>
 </head>
 
@@ -71,6 +82,14 @@
                 <span th:text="${post.countLike}"></span>
             </div>
         </article>
+
+        <div class="actions-div">
+            <form th:action="@{/blog/{id}(id=${post.id})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button class="btn" type="submit">Удалить</button>
+            </form>
+        </div>
+
     </section>
 </body>
 

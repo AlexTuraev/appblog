@@ -21,9 +21,9 @@ public class BlogRepositoryImpl implements BlogRepository {
     }
 
     private final String FIND_ALL_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post";
-    private final String FIND_BYID_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post where id = ?";
-
+    private final String FIND_BY_ID_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post where id = ?";
     private final String SAVE_POST_QUERY = "insert into public.post (title, content, tags, image_type, image) values (?, ?, ?, ?, ?)";
+    private final String DELETE_BY_ID_QUERY = "delete from public.post where id = ?";
 
     @Override
     public List<PostEntity> findAll() {
@@ -38,8 +38,13 @@ public class BlogRepositoryImpl implements BlogRepository {
 
     @Override
     public Optional<PostEntity> findById(long id) {
-        List<PostEntity> entities = jdbcTemplate.query(FIND_BYID_QUERY, rowMapperPostEntity, id);
+        List<PostEntity> entities = jdbcTemplate.query(FIND_BY_ID_QUERY, rowMapperPostEntity, id);
         return Optional.ofNullable(entities.getFirst());
+    }
+
+    @Override
+    public void deleteById(long id) {
+        jdbcTemplate.update(DELETE_BY_ID_QUERY, id);
     }
 
     RowMapper<PostEntity> rowMapperPostEntity = (rs, rowNum) -> new PostEntity(

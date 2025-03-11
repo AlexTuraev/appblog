@@ -53,6 +53,11 @@ public class BlogServiceImpl implements BlogService {
                 .orElse(null);
     }
 
+    @Override
+    public void deleteById(long id) {
+        blogRepository.deleteById(id);
+    }
+
     private boolean isFileSizeValid(MultipartFile file) {
         return file.getSize() <= maxFileSize;
     }

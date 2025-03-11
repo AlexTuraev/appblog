@@ -13,4 +13,6 @@ public interface BlogService {
     void save(PostDto postDto, MultipartFile file) throws IOException;
 
     PostDto getById(long id);
+
+    void deleteById(long id);
 }
