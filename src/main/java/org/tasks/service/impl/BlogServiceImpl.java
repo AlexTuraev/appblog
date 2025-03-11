@@ -11,7 +11,6 @@ import org.tasks.service.mapping.PostMapping;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -50,22 +49,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     private boolean isFileSizeValid(MultipartFile file) {
-        if (file.getSize() <= maxFileSize) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    private byte[] getFileBytes(MultipartFile file) throws IOException {
-        if (Objects.isNull(file)) {
-            return new byte[0];
-        }
-        else {
-            return file.getBytes();
-        }
-
+        return file.getSize() <= maxFileSize;
     }
 
 }
