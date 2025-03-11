@@ -14,6 +14,8 @@ public class PostDto {
     private String content;
     private Integer countLike;
     private String tags;
+    private String imageType;
     private byte[] image;
+    private String base64Image;
 
 }

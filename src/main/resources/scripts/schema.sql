@@ -20,6 +20,7 @@ create table if not exists post(
     foreign key (comment_id) references comment(id) on delete cascade,
     count_like int default 0,
     tags text,
+    image_type varchar(50),
     image bytea
 );
 

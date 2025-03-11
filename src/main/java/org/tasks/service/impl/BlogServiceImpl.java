@@ -30,9 +30,6 @@ public class BlogServiceImpl implements BlogService {
     public List<PostDto> getAllPost() {
         List<PostEntity> entities = blogRepository.findAll();
         return mapper.toDto(entities);
-//        Optional<PostEntity> entities = blogRepository.findById(1L);
-
-
     }
 
     @Override
@@ -40,6 +37,7 @@ public class BlogServiceImpl implements BlogService {
         if (isFileSizeValid(file)) {
             PostEntity postEntity = mapper.toModel(postDto);
             postEntity.setImage(file.getBytes());
+            postEntity.setImageType(file.getContentType());
             blogRepository.save(postEntity);
         }
         else {

@@ -118,7 +118,7 @@
                 <article class=" article">
                     <div class="article__title" th:text="${post.title}"/>
                     <div class="article__div-img">
-                        <img class="article__div-img__img" src="" alt="some picture">
+                        <img class="article__div-img__img" th:src="${post.base64Image}" alt="some picture">
                     </div>
 
                     <div class="article__content">
