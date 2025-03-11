@@ -18,4 +18,6 @@ public class PostDto {
     private byte[] image;
     private String base64Image;
 
+    private Integer countComment;
+
 }

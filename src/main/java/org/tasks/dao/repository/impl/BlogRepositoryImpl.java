@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Slf4j
 public class BlogRepositoryImpl implements BlogRepository {
 
     private final JdbcTemplate jdbcTemplate;

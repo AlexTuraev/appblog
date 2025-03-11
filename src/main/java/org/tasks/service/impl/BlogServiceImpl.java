@@ -7,6 +7,7 @@ import org.tasks.dao.model.PostEntity;
 import org.tasks.dao.repository.BlogRepository;
 import org.tasks.dto.PostDto;
 import org.tasks.service.BlogService;
+import org.tasks.service.CommentService;
 import org.tasks.service.mapping.PostMapping;
 
 import java.io.IOException;
@@ -20,16 +21,20 @@ public class BlogServiceImpl implements BlogService {
 
     private final BlogRepository blogRepository;
     private final PostMapping mapper;
+    private final CommentService commentService;
 
-    public BlogServiceImpl(BlogRepository blogRepository, PostMapping mapper) {
+    public BlogServiceImpl(BlogRepository blogRepository, PostMapping mapper, CommentService commentService) {
         this.blogRepository = blogRepository;
         this.mapper = mapper;
+        this.commentService = commentService;
     }
 
     @Override
     public List<PostDto> getAllPost() {
         List<PostEntity> entities = blogRepository.findAll();
-        return mapper.toDto(entities);
+        List<PostDto> postDtos = mapper.toDto(entities);
+        postDtos.forEach(postDto -> postDto.setCountComment(commentService.getCountCommentById(postDto.getId())));
+        return postDtos;
     }
 
     @Override

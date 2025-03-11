@@ -69,6 +69,9 @@
             margin-top: 10px;
             display: flex;
         }
+        .article__statistic{
+            margin-right: 50px;
+        }
         .form-wrapper{
             position: fixed;
             z-index: 1;
@@ -141,8 +144,15 @@
                     </div>
 
                     <div class="article__footer">
-                        <span th:text="${post.countLike}"> лайков</span>
-                        <span th:text="${post.countLike}"></span>
+                        <div class="article__statistic">
+                            <span>лайков: </span>
+                            <span th:text="${post.countLike}"></span>
+                        </div>
+
+                        <div class="article__statistic">
+                            <span>комментариев: </span>
+                            <span th:text="${post.countComment}"></span>
+                        </div>
                     </div>
                 </article>
             </li>
