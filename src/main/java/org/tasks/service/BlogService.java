@@ -11,4 +11,6 @@ public interface BlogService {
     List<PostDto> getAllPost();
 
     void save(PostDto postDto, MultipartFile file) throws IOException;
+
+    PostDto getById(long id);
 }

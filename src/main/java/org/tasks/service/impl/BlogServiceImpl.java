@@ -46,6 +46,13 @@ public class BlogServiceImpl implements BlogService {
 
     }
 
+    @Override
+    public PostDto getById(long id) {
+        return blogRepository.findById(id)
+                .map(mapper::toDto)
+                .orElse(null);
+    }
+
     private boolean isFileSizeValid(MultipartFile file) {
         return file.getSize() <= maxFileSize;
     }
