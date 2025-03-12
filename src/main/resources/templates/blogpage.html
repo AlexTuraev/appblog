@@ -115,6 +115,7 @@
             background: aquamarine;
         }
         .btn_adding_post{
+            float: right;
             position: sticky;
             top: 0;
             z-index: 2;
@@ -124,6 +125,30 @@
 
 <body>
     <header class="header">Blog page</header>
+
+    <form>
+        <p>
+            <label for="search">Найти по тегу: </label>
+            <input id="search" style="width:300px;" name="search" th:value="${search}">
+            <button name="action">&#128269;</button>
+        </p>
+        <p>
+            <label for="pageSize">Число постов: </label>
+            <select id="pageSize" name="pageSize" onchange="this.form.submit()">
+                <option value="5" th:selected="${paging.pageSize==5}">5</option>
+                <option value="10" th:selected="${paging.pageSize==10}">10</option>
+                <option value="20" th:selected="${paging.pageSize==20}">20</option>
+                <option value="50" th:selected="${paging.pageSize==50}">50</option>
+                <option value="100" th:selected="${paging.pageSize==100}">100</option>
+            </select>
+        </p>
+        <p>
+            <button th:if="${paging.hasPreviousPage}" name="pageNumber" th:value="${paging.pageNumber - 1}">&lt;</button>
+            <span th:text="${'Страница: '+paging.pageNumber}"></span>
+            <button th:if="${paging.hasNextPage}" name="pageNumber" th:value="${paging.pageNumber+1}">&gt;</button>
+        </p>
+    </form>
+
     <button class="btn btn_adding_post" onclick="toggleForm()" id="btn-addPost">Добавить статью в блог</button>
     <section class="section" id="main-section">
         <ul>
