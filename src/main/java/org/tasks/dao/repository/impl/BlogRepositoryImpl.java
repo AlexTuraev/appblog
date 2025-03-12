@@ -21,13 +21,13 @@ public class BlogRepositoryImpl implements BlogRepository {
     private final String FIND_COUNT_ALL_QUERY = "select count(*) from public.post";
     private final String FIND_COUNT_ALL_QUERY_LIKE_TAG = "select count(*) from public.post where tags like ?";
 
-    private final String FIND_ALL_PAGING_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post offset ? limit ?";
-    private final String FIND_ALL_PAGING_QUERY_LIKE_TAG = "select id, title, content, count_like, tags, image_type, image from public.post where tags like ? offset ? limit ?";
+    private final String FIND_ALL_PAGING_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post order by id offset ? limit ?";
+    private final String FIND_ALL_PAGING_QUERY_LIKE_TAG = "select id, title, content, count_like, tags, image_type, image from public.post where tags like ? order by id offset ? limit ?";
 
     private final String FIND_BY_ID_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post where id = ?";
     private final String SAVE_POST_QUERY = "insert into public.post (title, content, tags, image_type, image) values (?, ?, ?, ?, ?)";
     private final String DELETE_BY_ID_QUERY = "delete from public.post where id = ?";
-    private final String UPDATE_LIKE_BY_ID = "update public.post set count_like = count_like+? where id = ?";
+    private final String UPDATE_LIKE_BY_ID = "update public.post set count_like = greatest(count_like+?, 0) where id = ?";
 
     @Override
     public Integer getCountAll(String search) {
