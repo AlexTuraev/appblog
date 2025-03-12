@@ -29,6 +29,8 @@ public class BlogRepositoryImpl implements BlogRepository {
     private final String DELETE_BY_ID_QUERY = "delete from public.post where id = ?";
     private final String UPDATE_LIKE_BY_ID = "update public.post set count_like = greatest(count_like+?, 0) where id = ?";
 
+    private final String UPDATE_POST_BY_ID = "update public.post set title = ?, content = ?, tags = ?, image_type = ?, image = ?, count_like = count_like where id = ?";
+
     @Override
     public Integer getCountAll(String search) {
         return (search == null || search.isEmpty()) ?
@@ -45,8 +47,14 @@ public class BlogRepositoryImpl implements BlogRepository {
 
     @Override
     public void save(PostEntity model) {
-        jdbcTemplate.update(SAVE_POST_QUERY,
-                model.getTitle(), model.getContent(), model.getTags(), model.getImageType(), model.getImage());
+        if (model.getId() == null) {
+            jdbcTemplate.update(SAVE_POST_QUERY,
+                    model.getTitle(), model.getContent(), model.getTags(), model.getImageType(), model.getImage());
+        }
+        else {
+            jdbcTemplate.update(UPDATE_POST_BY_ID,
+                    model.getTitle(), model.getContent(), model.getTags(), model.getImageType(), model.getImage(), model.getId());
+        }
     }
 
     @Override

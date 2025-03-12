@@ -121,6 +121,11 @@
                 </form>
             </div>
             <div>
+                <form th:action="@{/blog/{id}/geteditpostpage(id=${post.id})}" method="post">
+                    <button class="btn" type="submit">Редактировать</button>
+                </form>
+            </div>
+            <div>
                 <form th:action="@{/blog/{id}(id=${post.id})}" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <button class="btn" type="submit">Удалить пост</button>

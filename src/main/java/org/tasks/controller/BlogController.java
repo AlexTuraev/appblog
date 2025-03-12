@@ -44,7 +44,7 @@ public class BlogController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String savePost(
+    public String createOrUpdatePost(
             @ModelAttribute PostDto postDto,
             @RequestParam(required = false, name = "file") MultipartFile file
     ) {
@@ -52,7 +52,7 @@ public class BlogController {
             blogService.save(postDto, file);
             return "redirect:/blog";
         }catch (Exception e) {
-            return "redirect:/errorsave";
+            return "errorsave";
         }
     }
 
@@ -86,6 +86,13 @@ public class BlogController {
         blogService.addLike(id, like);
 
         return "redirect:/blog/"+id;
+    }
+
+    @PostMapping(value = "/{id}/geteditpostpage")
+    public String getEditPage(@PathVariable(name = "id") long id, Model model) {
+        model.addAttribute("post", blogService.getById(id));
+
+        return "editpost";
     }
 
 }
