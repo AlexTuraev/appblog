@@ -69,10 +69,22 @@
         .btn:hover{
             background: aquamarine;
         }
+        .a-main{
+            float: right;
+            color: blue;
+        }
+        .a-main:hover{
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
+    <p>
+        <a th:href="@{/blog}">
+            <span class="a-main">НА ГЛАВНУЮ &cudarrr;</span>
+        </a>
+    </p>
     <header class="header">Страница поста</header>
     <section class="section" id="main-section">
         <article class=" article">
