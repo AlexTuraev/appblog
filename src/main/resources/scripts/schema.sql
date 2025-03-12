@@ -1,8 +1,3 @@
-create table if not exists tag(
-                                  id bigserial primary key,
-                                  tag_text varchar(50)
-    );
-
 -- ---------------------------------- --
 drop table if exists comment;
 drop table if exists post;
@@ -11,8 +6,6 @@ create table if not exists post(
                                    id bigserial primary key,
                                    title varchar(256) not null,
     content text,
-    tag_id bigint,
-    foreign key (tag_id) references tag(id) on delete cascade,
     count_like int default 0,
     tags text,
     image_type varchar(50),
