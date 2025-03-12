@@ -19,19 +19,27 @@ public class BlogRepositoryImpl implements BlogRepository {
     }
 
     private final String FIND_COUNT_ALL_QUERY = "select count(*) from public.post";
+    private final String FIND_COUNT_ALL_QUERY_LIKE_TAG = "select count(*) from public.post where tags like ?";
+
     private final String FIND_ALL_PAGING_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post offset ? limit ?";
+    private final String FIND_ALL_PAGING_QUERY_LIKE_TAG = "select id, title, content, count_like, tags, image_type, image from public.post where tags like ? offset ? limit ?";
+
     private final String FIND_BY_ID_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post where id = ?";
     private final String SAVE_POST_QUERY = "insert into public.post (title, content, tags, image_type, image) values (?, ?, ?, ?, ?)";
     private final String DELETE_BY_ID_QUERY = "delete from public.post where id = ?";
 
     @Override
-    public Integer getCountAll() {
-        return jdbcTemplate.queryForObject(FIND_COUNT_ALL_QUERY, Integer.class);
+    public Integer getCountAll(String search) {
+        return (search == null || search.isEmpty()) ?
+                jdbcTemplate.queryForObject(FIND_COUNT_ALL_QUERY, Integer.class) :
+                jdbcTemplate.queryForObject(FIND_COUNT_ALL_QUERY_LIKE_TAG, Integer.class, "%" + search + "%");
     }
 
     @Override
     public List<PostEntity> findAll(String search, int pageSize, int pageNumber) {
-        return jdbcTemplate.query(FIND_ALL_PAGING_QUERY, rowMapperPostEntity, pageNumber*pageSize, pageSize);
+        return (search == null || search.isEmpty()) ?
+                jdbcTemplate.query(FIND_ALL_PAGING_QUERY, rowMapperPostEntity, pageNumber*pageSize, pageSize) :
+                jdbcTemplate.query(FIND_ALL_PAGING_QUERY_LIKE_TAG, rowMapperPostEntity, "%" + search + "%", pageNumber*pageSize, pageSize);
     }
 
     @Override

@@ -70,11 +70,11 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Model getAllPostModel(Model model, String search, Integer pageSize, Integer pageNumber) {
-        Integer pageLimit = pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
-        Integer pageNo = pageNumber == null ? DEFAULT_PAGE_NUMBER : pageNumber-1;
+        int pageLimit = pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
+        int pageNo = pageNumber == null ? DEFAULT_PAGE_NUMBER : pageNumber-1;
 
         List<PostDto> posts =  getAllPost(search, pageLimit, pageNo);
-        Integer total = blogRepository.getCountAll();
+        Integer total = blogRepository.getCountAll(search);
 
         model.addAttribute("posts", posts);
         model.addAttribute("paging", new PagingDto(pageLimit, pageNo+1, total));
