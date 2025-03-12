@@ -87,8 +87,11 @@
             </div>
 
             <div class="article__footer">
-                <span>лайков: </span>
-                <span th:text="${post.countLike}"></span>
+                <form th:action="${'/blog/'+post.id+'/like'}" method="post">
+                    <button name="like" value="true">&#x1F44D;</button>
+                    <span th:text="${post.countLike}"></span>
+                    <button name="like" value="false">&#128078;</button>
+                </form>
             </div>
         </article>
 
