@@ -21,7 +21,7 @@ public class BlogServiceImpl implements BlogService {
     @Value("${spring.servlet.multipart.max-file-size:10Mb}")
     private int maxFileSize;
 
-    private final int DEFAULT_PAGE_SIZE = 5;
+    private final int DEFAULT_PAGE_SIZE = 3;
     private final int DEFAULT_PAGE_NUMBER = 0;
 
     private final BlogRepository blogRepository;
