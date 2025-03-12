@@ -2,9 +2,11 @@ package org.tasks.service.impl;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.tasks.dao.model.PostEntity;
 import org.tasks.dao.repository.BlogRepository;
+import org.tasks.dto.PagingDto;
 import org.tasks.dto.PostDto;
 import org.tasks.service.BlogService;
 import org.tasks.service.CommentService;
@@ -19,6 +21,9 @@ public class BlogServiceImpl implements BlogService {
     @Value("${spring.servlet.multipart.max-file-size:10Mb}")
     private int maxFileSize;
 
+    private final int DEFAULT_PAGE_SIZE = 5;
+    private final int DEFAULT_PAGE_NUMBER = 0;
+
     private final BlogRepository blogRepository;
     private final PostMapping mapper;
     private final CommentService commentService;
@@ -30,8 +35,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<PostDto> getAllPost() {
-        List<PostEntity> entities = blogRepository.findAll();
+    public List<PostDto> getAllPost(String search, Integer pageSize, Integer pageNumber) {
+        List<PostEntity> entities = blogRepository.findAll(search, pageSize, pageNumber);
         List<PostDto> postDtos = mapper.toDto(entities);
         postDtos.forEach(postDto -> postDto.setCountComment(commentService.getCountCommentById(postDto.getId())));
         return postDtos;
@@ -61,6 +66,19 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void deleteById(long id) {
         blogRepository.deleteById(id);
+    }
+
+    @Override
+    public Model getAllPostModel(Model model, String search, Integer pageSize, Integer pageNumber) {
+        Integer pageLimit = pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
+        Integer pageNo = pageNumber == null ? DEFAULT_PAGE_NUMBER : pageNumber-1;
+
+        List<PostDto> posts =  getAllPost(search, pageLimit, pageNo);
+        Integer total = blogRepository.getCountAll();
+
+        model.addAttribute("posts", posts);
+        model.addAttribute("paging", new PagingDto(pageLimit, pageNo+1, total));
+        return model;
     }
 
     private boolean isFileSizeValid(MultipartFile file) {

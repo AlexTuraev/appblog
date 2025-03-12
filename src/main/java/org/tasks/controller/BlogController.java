@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.tasks.dto.CommentDto;
-import org.tasks.dto.PagingDto;
 import org.tasks.dto.PostDto;
 import org.tasks.service.BlogService;
 import org.tasks.service.CommentService;
@@ -24,9 +23,6 @@ import java.util.List;
 @RequestMapping("/blog")
 public class BlogController {
 
-    private final int DEFAULT_PAGE_SIZE = 5;
-    private final int DEFAULT_PAGE_NUMBER = 1;
-
     private final BlogService blogService;
     private final CommentService commentService;
 
@@ -36,10 +32,13 @@ public class BlogController {
     }
 
     @GetMapping
-    public String getAllPost(Model model) {
-        List<PostDto> posts =  blogService.getAllPost();
-        model.addAttribute("posts", posts);
-        model.addAttribute("paging", new PagingDto(DEFAULT_PAGE_SIZE, DEFAULT_PAGE_NUMBER, posts.size()));
+    public String getAllPost(
+            Model model,
+            @RequestParam(name = "search", required = false) String search,
+            @RequestParam(name = "pageSize", required = false) Integer pageSize,
+            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
+
+        model = blogService.getAllPostModel(model, search, pageSize, pageNumber);
 
         return "blogpage";
     }

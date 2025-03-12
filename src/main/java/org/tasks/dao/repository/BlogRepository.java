@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BlogRepository {
-    List<PostEntity> findAll();
+    Integer getCountAll();
+
+    List<PostEntity> findAll(String search, int pageSize, int pageNumber);
 
     void save(PostEntity model);
 

@@ -1,6 +1,5 @@
 package org.tasks.dao.repository.impl;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -19,14 +18,20 @@ public class BlogRepositoryImpl implements BlogRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final String FIND_ALL_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post";
+    private final String FIND_COUNT_ALL_QUERY = "select count(*) from public.post";
+    private final String FIND_ALL_PAGING_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post offset ? limit ?";
     private final String FIND_BY_ID_QUERY = "select id, title, content, count_like, tags, image_type, image from public.post where id = ?";
     private final String SAVE_POST_QUERY = "insert into public.post (title, content, tags, image_type, image) values (?, ?, ?, ?, ?)";
     private final String DELETE_BY_ID_QUERY = "delete from public.post where id = ?";
 
     @Override
-    public List<PostEntity> findAll() {
-        return jdbcTemplate.query(FIND_ALL_QUERY, rowMapperPostEntity);
+    public Integer getCountAll() {
+        return jdbcTemplate.queryForObject(FIND_COUNT_ALL_QUERY, Integer.class);
+    }
+
+    @Override
+    public List<PostEntity> findAll(String search, int pageSize, int pageNumber) {
+        return jdbcTemplate.query(FIND_ALL_PAGING_QUERY, rowMapperPostEntity, pageNumber*pageSize, pageSize);
     }
 
     @Override
