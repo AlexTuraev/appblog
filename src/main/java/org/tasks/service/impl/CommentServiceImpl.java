@@ -34,4 +34,9 @@ public class CommentServiceImpl implements CommentService {
         return repository.findByPostId(postId)
                 .stream().map(mapper::toDto).toList();
     }
+
+    @Override
+    public void deleteById(long id) {
+        repository.deleteById(id);
+    }
 }

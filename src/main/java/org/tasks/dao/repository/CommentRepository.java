@@ -11,4 +11,6 @@ public interface CommentRepository {
     void save(CommentEntity entity);
 
     List<CommentEntity> findByPostId(Long postId);
+
+    void deleteById(long id);
 }

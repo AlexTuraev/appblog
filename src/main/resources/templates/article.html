@@ -141,6 +141,15 @@
                         <span>Комментарий id:</span><span th:text="${comment.id}"></span><br>
                         <span th:text="${comment.content}"></span>
                     </div>
+
+                    <div>
+                        <form th:action="@{/blog/comment/{id}(id=${comment.id})}" method="post">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="postId" th:value="${post.id}">
+                            <button type="submit">Удалить комментарий</button>
+                        </form>
+                    </div>
+
                 </li>
             </ul>
         </div>

@@ -22,6 +22,8 @@ public class CommentRepositoryImpl implements CommentRepository {
 
     private final String FIND_BY_POST_ID_QUERY= "select id, content, post_id from public.comment where post_id = ?";
 
+    private final String DELETE_COMMENT_BY_ID_QUERY= "delete from public.comment where id = ?";
+
     @Override
     public Integer countCommentById(Long postId) {
         return jdbcTemplate.query(COUNT_COMMENT_BY_ID_QUERY, (rs, rowNum) -> rs.getInt(1), postId).getFirst();
@@ -41,6 +43,11 @@ public class CommentRepositoryImpl implements CommentRepository {
                         rs.getLong("post_id")
                 ),
                 postId);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        jdbcTemplate.update(DELETE_COMMENT_BY_ID_QUERY, id);
     }
 
 }

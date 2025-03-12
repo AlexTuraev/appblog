@@ -11,4 +11,6 @@ public interface CommentService {
     void addComment(CommentDto commentDto);
 
     List<CommentDto> findByPostId(Long postId);
+
+    void deleteById(long id);
 }
