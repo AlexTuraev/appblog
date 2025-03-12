@@ -114,6 +114,13 @@
         .btn:hover{
             background: aquamarine;
         }
+        @keyframes blink {
+            50% {background: white;}
+        }
+        .btn__cancel{
+            background: yellow;
+            /*animation: blink 2s step-end infinite;*/
+        }
         .btn_adding_post{
             float: right;
             position: sticky;
@@ -220,10 +227,12 @@
              if(form.style.display === 'none'){
                  form.style.display = 'block';
                  btn.innerText = 'Отменить добавление статьи';
+                 btn.classList.add("btn__cancel");
                  section.style.opacity = '0.5';
              }else {
                  form.style.display = 'none';
                  btn.innerText = 'Добавить статью в блог';
+                 btn.classList.remove("btn__cancel");
                  section.style.opacity = '1';
              }
         }
