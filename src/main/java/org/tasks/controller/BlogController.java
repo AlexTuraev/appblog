@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/blog")
 public class BlogController {
 
-    private final int DEFAULT_PAGE_SIZE = 10;
+    private final int DEFAULT_PAGE_SIZE = 5;
     private final int DEFAULT_PAGE_NUMBER = 1;
 
     private final BlogService blogService;
