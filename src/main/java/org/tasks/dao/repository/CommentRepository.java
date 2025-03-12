@@ -1,7 +1,14 @@
 package org.tasks.dao.repository;
 
+import org.tasks.dao.model.CommentEntity;
+
+import java.util.List;
+
 public interface CommentRepository {
 
-    Integer countCommentById(Long id);
+    Integer countCommentById(Long postId);
 
+    void save(CommentEntity entity);
+
+    List<CommentEntity> findByPostId(Long postId);
 }

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.tasks.dto.CommentDto;
 import org.tasks.dto.PostDto;
 import org.tasks.service.BlogService;
+import org.tasks.service.CommentService;
 
 import java.util.List;
 
@@ -22,9 +24,11 @@ import java.util.List;
 public class BlogController {
 
     private final BlogService blogService;
+    private final CommentService commentService;
 
-    public BlogController(BlogService blogService) {
+    public BlogController(BlogService blogService, CommentService commentService) {
         this.blogService = blogService;
+        this.commentService = commentService;
     }
 
     @GetMapping
@@ -53,6 +57,9 @@ public class BlogController {
         PostDto post = blogService.getById(id);
         model.addAttribute("post", post);
 
+        List<CommentDto> comments = commentService.findByPostId(post.getId());
+        model.addAttribute("comments", comments);
+
         return "article";
     }
 
@@ -61,6 +68,13 @@ public class BlogController {
         blogService.deleteById(id);
 
         return  "redirect:/blog";
+    }
+
+    @PostMapping(value = "/comment")
+    public String addComment(@ModelAttribute CommentDto commentDto, Model model) {
+        commentService.addComment(commentDto);
+
+        return getPost(commentDto.getPostId(), model);
     }
 
 }

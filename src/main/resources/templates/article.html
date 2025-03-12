@@ -10,6 +10,9 @@
             padding: 0;
             color: black;
         }
+        ul, li{
+            list-style: none;
+        }
         body{
             width: 1200px;
             margin: 0 auto 0;
@@ -49,8 +52,14 @@
             margin-top: 10px;
             display: flex;
         }
-        .actions-div{
+        .article__actions-div{
             display: flex;
+        }
+        .artile__comments{
+            margin-top: 25px;
+        }
+        .article__single-comment{
+            margin: 20px auto 15px;
         }
         .btn{
             font-size: 20px;
@@ -78,16 +87,34 @@
             </div>
 
             <div class="article__footer">
-                <span th:text="${post.countLike}"> лайков</span>
+                <span>лайков: </span>
                 <span th:text="${post.countLike}"></span>
             </div>
         </article>
 
-        <div class="actions-div">
+        <div class="article__actions-div">
             <form th:action="@{/blog/{id}(id=${post.id})}" method="post">
                 <input type="hidden" name="_method" value="delete">
-                <button class="btn" type="submit">Удалить</button>
+                <button class="btn" type="submit">Удалить пост</button>
             </form>
+
+            <form th:action="@{/blog/comment}" method="post">
+                <input type="hidden" name="postId" th:value="${post.id}" >
+                <input name="content">
+                <button class="btn" type="submit">Добавить комментарий</button>
+            </form>
+        </div>
+
+        <div class="artile__comments">
+            <h3>Комментарии:</h3>
+            <ul>
+                <li th:each="comment : ${comments}">
+                    <div class="article__single-comment">
+                        <span>Комментарий id:</span><span th:text="${comment.id}"></span><br>
+                        <span th:text="${comment.content}"></span>
+                    </div>
+                </li>
+            </ul>
         </div>
 
     </section>

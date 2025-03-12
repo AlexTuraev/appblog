@@ -3,25 +3,27 @@ create table if not exists tag(
                                   tag_text varchar(50)
     );
 
-create table if not exists comment(
-                                      id bigserial primary key,
-                                      content text
-);
-
+-- ---------------------------------- --
+drop table if exists comment;
 drop table if exists post;
-
+-- ---------------------------------- --
 create table if not exists post(
-    id bigserial primary key,
-    title varchar(256) not null,
+                                   id bigserial primary key,
+                                   title varchar(256) not null,
     content text,
     tag_id bigint,
-    comment_id bigint,
     foreign key (tag_id) references tag(id) on delete cascade,
-    foreign key (comment_id) references comment(id) on delete cascade,
     count_like int default 0,
     tags text,
     image_type varchar(50),
     image bytea
+    );
+
+create table if not exists comment(
+                                      id bigserial primary key,
+                                      content text,
+                                      post_id bigint,
+                                      foreign key (post_id) references post(id) on delete cascade
 );
 
 
@@ -32,3 +34,11 @@ insert into post(title, content) values ('Пост4', 'Содержание по
 insert into post(title, content) values ('Пост5', 'Содержание поста №4. Содержание поста №5.');
 insert into post(title, content) values ('Пост6', 'Содержание поста №4. Содержание поста №6.');
 insert into post(title, content) values ('Пост7', 'Содержание поста №4. Содержание поста №7.');
+
+insert into comment(content, post_id) values ('Комментарий 1_1', 1);
+insert into comment(content, post_id) values ('Комментарий 1_2', 1);
+insert into comment(content, post_id) values ('Комментарий 1_3', 1);
+insert into comment(content, post_id) values ('Комментарий 2_1', 2);
+insert into comment(content, post_id) values ('Комментарий 2_2', 2);
+insert into comment(content, post_id) values ('Комментарий 2_3', 2);
+insert into comment(content, post_id) values ('Комментарий 2_4', 2);
