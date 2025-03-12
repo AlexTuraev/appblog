@@ -81,4 +81,11 @@ public class BlogController {
         return getPost(commentDto.getPostId(), model);
     }
 
+    @PostMapping(value = "/{id}/like")
+    public String addLike(@PathVariable(name = "id") long id, @RequestParam(name = "like") boolean like, Model model) {
+        blogService.addLike(id, like);
+
+        return "redirect:/blog/"+id;
+    }
+
 }

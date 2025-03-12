@@ -18,4 +18,6 @@ public interface BlogService {
     void deleteById(long id);
 
     Model getAllPostModel(Model model, String search, Integer pageSize, Integer pageNumber);
+
+    void addLike(long id, boolean like);
 }

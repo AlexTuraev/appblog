@@ -15,4 +15,6 @@ public interface BlogRepository {
     Optional<PostEntity> findById(long id);
 
     void deleteById(long id);
+
+    void addLike(long id, boolean like);
 }

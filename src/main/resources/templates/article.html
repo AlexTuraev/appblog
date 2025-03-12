@@ -87,7 +87,7 @@
             </div>
 
             <div class="article__footer">
-                <form th:action="${'/blog/'+post.id+'/like'}" method="post">
+                <form th:action="@{/blog/{id}/like(id=${post.id})}" method="post">
                     <button name="like" value="true">&#x1F44D;</button>
                     <span th:text="${post.countLike}"></span>
                     <button name="like" value="false">&#128078;</button>

@@ -81,6 +81,11 @@ public class BlogServiceImpl implements BlogService {
         return model;
     }
 
+    @Override
+    public void addLike(long id, boolean like) {
+        blogRepository.addLike(id, like);
+    }
+
     private boolean isFileSizeValid(MultipartFile file) {
         return file.getSize() <= maxFileSize;
     }
