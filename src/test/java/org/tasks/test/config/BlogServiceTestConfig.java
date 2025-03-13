@@ -26,7 +26,7 @@ public class BlogServiceTestConfig {
     }
 
     @Bean
-    public CommentService commentService() {
+    public CommentService mockCommentService() {
         return Mockito.mock(CommentService.class);
     }
 
