@@ -1,33 +1,24 @@
 package org.tasks.test.service;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.tasks.WebConfig;
 import org.tasks.dao.model.PostEntity;
 import org.tasks.dao.repository.BlogRepository;
 import org.tasks.dto.PostDto;
 import org.tasks.service.BlogService;
 import org.tasks.service.CommentService;
 import org.tasks.test.config.BlogServiceTestConfig;
-import org.tasks.test.config.WebConfigTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-
-
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(classes = {BlogServiceTestConfig.class/*, WebConfig.class*/})
 
 @SpringJUnitConfig(classes = {BlogServiceTestConfig.class})
 class BlogServiceImplTest {
@@ -44,6 +35,8 @@ class BlogServiceImplTest {
     private List<PostEntity> posts;
     private List<PostDto> postDtos;
 
+    private final int COUNT_COMMENT = 10;
+
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         PostEntity postEntity1 = new PostEntity(1L, "title1", "content1", 10, "#аренда", null, null);
@@ -52,8 +45,8 @@ class BlogServiceImplTest {
         posts.add(postEntity1);
         posts.add(postEntity2);
 
-        PostDto postDto1 = new PostDto(1L, "title1", "content1", 10, "#аренда", null, null, null, 10);
-        PostDto postDto2 = new PostDto(2L, "title2", "content2", 20, "#продажа", null, null, null, 10);
+        PostDto postDto1 = new PostDto(1L, "title1", "content1", 10, "#аренда", null, null, null, COUNT_COMMENT);
+        PostDto postDto2 = new PostDto(2L, "title2", "content2", 20, "#продажа", null, null, null, COUNT_COMMENT);
         postDtos = new ArrayList<>();
         postDtos.add(postDto1);
         postDtos.add(postDto2);
@@ -62,8 +55,7 @@ class BlogServiceImplTest {
     @Test
     void getAllPost() {
         when(mockBlogRepository.findAll(null, 3, 0)).thenReturn(posts);
-        when(mockCommentService.getCountCommentById(anyLong())).thenReturn(10);
-
+        when(mockCommentService.getCountCommentById(anyLong())).thenReturn(COUNT_COMMENT);
         List<PostDto> actualPosts = blogService.getAllPost(null, 3, 0);
 
         assertEquals(2, actualPosts.size());
@@ -71,23 +63,18 @@ class BlogServiceImplTest {
         assertEquals(postDtos.get(1), actualPosts.get(1));
     }
 
-/*    @Test
-    void save() {
-    }
-
     @Test
     void getById() {
+        when(mockBlogRepository.findById(1L)).thenReturn(Optional.of(posts.get(0)));
+        when(mockBlogRepository.findById(50L)).thenReturn(Optional.empty());
+
+        PostDto expected = postDtos.get(0);
+        expected.setCountComment(null);
+        PostDto actualDto = blogService.getById(1L);
+        assertEquals(expected, actualDto);
+
+        actualDto = blogService.getById(50L);
+        assertTrue(Objects.isNull(actualDto));
     }
 
-    @Test
-    void deleteById() {
-    }
-
-    @Test
-    void getAllPostModel() {
-    }
-
-    @Test
-    void addLike() {
-    }*/
 }
