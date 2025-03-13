@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class BlogServiceImpl implements BlogService {
 
-    @Value("${spring.servlet.multipart.max-file-size:10Mb}")
+    @Value("${spring.servlet.multipart.max-file-size:10485760}")
     private int maxFileSize;
 
     private final int DEFAULT_PAGE_SIZE = 3;
