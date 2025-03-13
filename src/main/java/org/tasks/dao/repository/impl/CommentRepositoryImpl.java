@@ -20,9 +20,11 @@ public class CommentRepositoryImpl implements CommentRepository {
 
     private final String SAVE_COMMENT_QUERY = "insert into public.comment (content, post_id) values (?, ?)";
 
-    private final String FIND_BY_POST_ID_QUERY= "select id, content, post_id from public.comment where post_id = ?";
+    private final String FIND_BY_POST_ID_QUERY= "select id, content, post_id from public.comment where post_id = ? order by id";
 
     private final String DELETE_COMMENT_BY_ID_QUERY= "delete from public.comment where id = ?";
+
+    private final String UPDATE_COMMENT_BY_ID = "update public.comment set content = ?, post_id = post_id where id = ?";
 
     @Override
     public Integer countCommentById(Long postId) {
@@ -48,6 +50,11 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public void deleteById(long id) {
         jdbcTemplate.update(DELETE_COMMENT_BY_ID_QUERY, id);
+    }
+
+    @Override
+    public void updateById(long id, String content) {
+        jdbcTemplate.update(UPDATE_COMMENT_BY_ID, content, id);
     }
 
 }

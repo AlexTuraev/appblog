@@ -39,4 +39,9 @@ public class CommentServiceImpl implements CommentService {
     public void deleteById(long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public void updateById(long id, String content) {
+        repository.updateById(id, content);
+    }
 }

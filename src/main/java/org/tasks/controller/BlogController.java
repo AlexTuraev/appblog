@@ -98,7 +98,12 @@ public class BlogController {
     @PostMapping(value = "/comment/{id}", params = "_method=delete")
     public String deleteCommentById(@PathVariable(name = "id") long id, @RequestParam(name = "postId") long postId, Model model) {
         commentService.deleteById(id);
+        return  getPost(postId, model);
+    }
 
+    @PostMapping(value = "/comment/{id}", params = "_method=put")
+    public String editCommentById(@PathVariable(name = "id") long id, @RequestParam(name = "postId") long postId, @RequestParam(name = "content") String content, Model model) {
+        commentService.updateById(id, content);
         return  getPost(postId, model);
     }
 

@@ -67,7 +67,16 @@
             margin: 5px auto 5px;
         }
         .article__edit-delete{
-            width: 200px;
+        }
+        .article__element__input,
+        .article__element__input:active,
+        .article__element__input:focus
+        {
+            font-size: 20px;
+            width: 80%;
+            outline: 0;
+            border: none;
+            border-bottom: 1px solid black;
         }
         .btn{
             font-size: 20px;
@@ -152,15 +161,20 @@
                         </form>
                     </div>
 
-                    <div class="article__single-comment">
+                    <div id="spanCommentContent" class="article__single-comment">
                         <span th:text="${comment.content}"></span>
                     </div>
 
-                    <div class="article__edit-delete">
+                    <div id="editBtn" class="article__edit-delete">
+                        <button style="color: blue;" title="Редактировать" onclick="editComment()">&#9998;</button>
+                    </div>
+
+                    <div id="editForm" class="article__edit-delete" style="display: none">
                         <form th:action="@{/blog/comment/{id}(id=${comment.id})}" method="post">
                             <input type="hidden" name="_method" value="put">
                             <input type="hidden" name="postId" th:value="${post.id}">
-                            <button style="color: blue;" title="Редактировать" type="submit">&#9998;</button>
+                            <input class="article__element__input" th:value="${comment.content}" name="content" required><br>
+                            <button style="color: blue;" title="Сохранить" type="submit">&#10004;</button>
                         </form>
                     </div>
 
@@ -169,6 +183,18 @@
         </div>
 
     </section>
+
+    <script>
+        function editComment() {
+            const formEditComment = document.getElementById('editForm');
+            const editBtn = document.getElementById('editBtn');
+            const spanComment = document.getElementById('spanCommentContent');
+
+            formEditComment.style.display = 'block';
+            editBtn.style.display = 'none';
+            spanComment.style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
