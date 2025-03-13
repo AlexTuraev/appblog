@@ -161,15 +161,15 @@
                         </form>
                     </div>
 
-                    <div id="spanCommentContent" class="article__single-comment">
+                    <div th:id="'spanCommentContent' + ${comment.id}" class="article__single-comment">
                         <span th:text="${comment.content}"></span>
                     </div>
 
-                    <div id="editBtn" class="article__edit-delete">
-                        <button style="color: blue;" title="Редактировать" onclick="editComment()">&#9998;</button>
+                    <div th:id="'editBtn' + ${comment.id}" class="article__edit-delete">
+                        <button style="color: blue;" title="Редактировать" th:value="${comment.id}" onclick="editComment(this.value)">&#9998;</button>
                     </div>
 
-                    <div id="editForm" class="article__edit-delete" style="display: none">
+                    <div th:id="'editForm' + ${comment.id}" class="article__edit-delete" style="display: none">
                         <form th:action="@{/blog/comment/{id}(id=${comment.id})}" method="post">
                             <input type="hidden" name="_method" value="put">
                             <input type="hidden" name="postId" th:value="${post.id}">
@@ -185,10 +185,10 @@
     </section>
 
     <script>
-        function editComment() {
-            const formEditComment = document.getElementById('editForm');
-            const editBtn = document.getElementById('editBtn');
-            const spanComment = document.getElementById('spanCommentContent');
+        function editComment(commentId) {
+            const formEditComment = document.getElementById('editForm' + commentId);
+            const editBtn = document.getElementById('editBtn' + commentId);
+            const spanComment = document.getElementById('spanCommentContent' + commentId);
 
             formEditComment.style.display = 'block';
             editBtn.style.display = 'none';
