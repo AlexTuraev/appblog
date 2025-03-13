@@ -43,6 +43,7 @@
         }
         .article__content{
             width: 100%;
+            margin-top: 15px;
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -117,6 +118,10 @@
 
             <div class="article__content">
                 <span th:text="${post.content}"></span>
+            </div>
+
+            <div class="article__content">
+                <span th:text="'Теги: ' + ${post.tags}"></span>
             </div>
 
             <div class="article__footer">
