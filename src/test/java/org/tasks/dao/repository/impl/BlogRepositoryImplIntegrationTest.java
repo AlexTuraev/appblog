@@ -40,6 +40,7 @@ class BlogRepositoryImplIntegrationTest {
 
     @BeforeEach
     void setUp() {
+        jdbcTemplate.execute("delete from post");
         jdbcTemplate.execute("" +
                 "insert into post(title, content, tags, count_like) values ('title1', 'content1', 'tag1', 10);\n" +
                 "insert into post(title, content, tags, count_like) values ('title2', 'content2', 'tag1', 8);\n" +
