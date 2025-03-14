@@ -3,14 +3,14 @@ package org.tasks.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
 
 @Configuration
-@TestPropertySource("classpath:resources/application-test.properties")
 public class DataSourceTestConfig {
 
     @Bean
@@ -34,6 +34,10 @@ public class DataSourceTestConfig {
         dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
+
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScript(new ClassPathResource("test-schema.sql"));
+        populator.execute(dataSource);
 
         return dataSource;
     }

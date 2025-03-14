@@ -60,7 +60,7 @@ public class BlogRepositoryImpl implements BlogRepository {
     @Override
     public Optional<PostEntity> findById(long id) {
         List<PostEntity> entities = jdbcTemplate.query(FIND_BY_ID_QUERY, rowMapperPostEntity, id);
-        return Optional.ofNullable(entities.getFirst());
+        return entities.isEmpty() ? Optional.empty() : Optional.ofNullable(entities.getFirst());
     }
 
     @Override
