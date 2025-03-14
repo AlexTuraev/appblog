@@ -1,4 +1,4 @@
-package org.tasks.repository;
+package org.tasks.dao.repository.impl;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.tasks.config.DataSourceTestConfig;
 import org.tasks.dao.model.PostEntity;
 import org.tasks.dao.repository.BlogRepository;
-import org.tasks.dao.repository.impl.BlogRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
