@@ -1,4 +1,4 @@
-package org.tasks.test.config;
+package org.tasks.config;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import org.tasks.dao.repository.CommentRepository;
 import org.tasks.service.CommentService;
 import org.tasks.service.impl.CommentServiceImpl;
 import org.tasks.service.mapping.CommentMapper;
-import org.tasks.test.service.mapper.CommentTestMapper;
+import org.tasks.service.mapper.CommentTestMapper;
 
 @Configuration
 public class CommentServiceTestConfig {

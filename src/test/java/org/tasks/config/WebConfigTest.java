@@ -1,4 +1,4 @@
-package org.tasks.test.config;
+package org.tasks.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

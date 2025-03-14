@@ -1,4 +1,4 @@
-package org.tasks.test.service;
+package org.tasks.service.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,9 +7,8 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.tasks.dao.model.CommentEntity;
 import org.tasks.dao.repository.CommentRepository;
 import org.tasks.dto.CommentDto;
+import org.tasks.config.CommentServiceTestConfig;
 import org.tasks.service.CommentService;
-import org.tasks.service.mapping.CommentMapper;
-import org.tasks.test.config.CommentServiceTestConfig;
 
 import java.util.List;
 

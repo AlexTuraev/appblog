@@ -1,4 +1,4 @@
-package org.tasks.test.config;
+package org.tasks.config;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import org.tasks.service.BlogService;
 import org.tasks.service.CommentService;
 import org.tasks.service.impl.BlogServiceImpl;
 import org.tasks.service.mapping.PostMapping;
-import org.tasks.test.service.mapper.PostMappingImplTest;
+import org.tasks.service.mapper.PostMappingImplTest;
 
 @Configuration
 public class BlogServiceTestConfig {

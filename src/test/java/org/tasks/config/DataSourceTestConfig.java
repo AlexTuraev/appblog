@@ -1,4 +1,4 @@
-package org.tasks.test.config;
+package org.tasks.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.test.context.TestPropertySource;
 import javax.sql.DataSource;
 
 @Configuration
-@TestPropertySource("classpath:org/tasks/test/resources/application-test.properties")
+@TestPropertySource("classpath:resources/application-test.properties")
 public class DataSourceTestConfig {
 
     @Bean

@@ -1,4 +1,4 @@
-package org.tasks.test.service;
+package org.tasks.service.impl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.tasks.dao.model.PostEntity;
 import org.tasks.dao.repository.BlogRepository;
 import org.tasks.dto.PostDto;
+import org.tasks.config.BlogServiceTestConfig;
 import org.tasks.service.BlogService;
 import org.tasks.service.CommentService;
-import org.tasks.test.config.BlogServiceTestConfig;
 
 import java.util.ArrayList;
 import java.util.List;

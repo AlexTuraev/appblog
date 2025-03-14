@@ -1,4 +1,4 @@
-package org.tasks.test.service.mapper;
+package org.tasks.service.mapper;
 
 import org.tasks.dao.model.CommentEntity;
 import org.tasks.dto.CommentDto;
