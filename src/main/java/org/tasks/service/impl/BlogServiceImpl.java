@@ -38,7 +38,7 @@ public class BlogServiceImpl implements BlogService {
     public List<PostDto> getAllPost(String search, Integer pageSize, Integer pageNumber) {
         List<PostEntity> entities = blogRepository.findAll(search, pageSize, pageNumber);
         List<PostDto> postDtos = mapper.toDto(entities);
-        postDtos.forEach(postDto -> postDto.setCountComment(commentService.getCountCommentById(postDto.getId())));
+        postDtos.forEach(postDto -> postDto.setCountComment(commentService.getCountCommentByPostId(postDto.getId())));
         return postDtos;
     }
 

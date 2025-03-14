@@ -31,9 +31,9 @@ class CommentServiceImplTest {
     private final long POST_ID = 1L;
 
     @Test
-    void getCountCommentById() {
-        when(mockCommentRepository.countCommentById(1L)).thenReturn(10);
-        int actual = commentService.getCountCommentById(1L);
+    void getCountCommentByPostId() {
+        when(mockCommentRepository.countCommentByPostId(1L)).thenReturn(10);
+        int actual = commentService.getCountCommentByPostId(1L);
         assertEquals(10, actual);
     }
 

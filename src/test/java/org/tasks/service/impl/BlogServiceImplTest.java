@@ -55,7 +55,7 @@ class BlogServiceImplTest {
     @Test
     void getAllPost() {
         when(mockBlogRepository.findAll(null, 3, 0)).thenReturn(posts);
-        when(mockCommentService.getCountCommentById(anyLong())).thenReturn(COUNT_COMMENT);
+        when(mockCommentService.getCountCommentByPostId(anyLong())).thenReturn(COUNT_COMMENT);
         List<PostDto> actualPosts = blogService.getAllPost(null, 3, 0);
 
         assertEquals(2, actualPosts.size());

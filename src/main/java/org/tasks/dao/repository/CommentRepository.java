@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommentRepository {
 
-    Integer countCommentById(Long postId);
+    Integer countCommentByPostId(Long postId);
 
     void save(CommentEntity entity);
 

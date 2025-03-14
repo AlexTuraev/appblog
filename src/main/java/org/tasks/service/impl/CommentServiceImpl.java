@@ -20,8 +20,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Integer getCountCommentById(Long postId) {
-        return repository.countCommentById(postId);
+    public Integer getCountCommentByPostId(Long postId) {
+        return repository.countCommentByPostId(postId);
     }
 
     @Override

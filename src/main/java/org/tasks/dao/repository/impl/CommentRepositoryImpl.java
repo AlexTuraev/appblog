@@ -27,7 +27,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     private final String UPDATE_COMMENT_BY_ID = "update public.comment set content = ?, post_id = post_id where id = ?";
 
     @Override
-    public Integer countCommentById(Long postId) {
+    public Integer countCommentByPostId(Long postId) {
         return jdbcTemplate.query(COUNT_COMMENT_BY_ID_QUERY, (rs, rowNum) -> rs.getInt(1), postId).getFirst();
     }
 

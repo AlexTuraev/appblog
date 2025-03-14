@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommentService {
 
-    Integer getCountCommentById(Long postId);
+    Integer getCountCommentByPostId(Long postId);
 
     void addComment(CommentDto commentDto);
 
